@@ -1,0 +1,26 @@
+{
+  "name": "skeletondashboard",
+  "description": "This is my first version using nodejs,npm,gulp and bower see how it goes",
+  "main": "yes",
+  "authors": [
+    "rafaelsilva"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "yes"
+  ],
+  "homepage": "https://github.com/rafaelsilva1406/skeletondashboard",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "~3.3.6",
+    "font-awesome": "fontawesome#~4.5.0"
+  }
+}
