@@ -1,2 +1,5 @@
-# skeletondashboard ignore dirs or files
+# Build Systems #
+#################
 node_modules/
+.sass-cache/
+bower_components/
