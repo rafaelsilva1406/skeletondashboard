@@ -11,5 +11,5 @@ app.config(function($stateProvider,$urlRouterProvider){
         });
 });
 app.controller('MainController', function($scope) {
-    $scope.message = 'Live change on reload view!';
+    $scope.message = 'Live change on reload from src!';
 });
