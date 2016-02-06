@@ -1,0 +1,44 @@
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+    <form novalidate class="login-form">
+        <div class="form-group" ng-show="master.showInput">
+            <label for="username">Username</label>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span> 
+                <input type="text" class="form-control" ng-model="user.username" placeholder="Username"/>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="checkbox">
+                    <label for="show-email">
+                        <input type="checkbox" ng-model="master.showInput"> Use Email Instead
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-show="!master.showInput">
+            <label for="email">Email</label>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                <input type="email" class="form-control" ng-model="user.email" placeholder="Email address"/>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="checkbox">
+                    <label for="show-username">
+                        <input type="checkbox" ng-model="master.showInput"> Use Username Instead
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                <input type="password" class="form-control" ng-model="user.password" placeholder="Password"/>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default" ng-click="validate(user)">Log in</button>   
+    </form>
+        </div>
+    </div>
+</section>

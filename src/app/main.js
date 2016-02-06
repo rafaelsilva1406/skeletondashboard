@@ -6,10 +6,22 @@ app.config(function($stateProvider,$urlRouterProvider){
     $stateProvider
         .state('index',{
            url:'',
-           templateUrl:'partials/test.html',
-           controller:'MainController' 
+           views:{
+               'header':{
+                   templateUrl: 'partials/header.html'
+               },
+               'login':{
+                   templateUrl:'partials/login.html'      
+               }
+           },
+           controller:'IndexController' 
         });
 });
-app.controller('MainController', function($scope) {
-    $scope.message = 'Live change on reload from src!';
+app.controller('IndexController', function($scope){
+    $scope.master = {};
+    $scope.$apply(function(){
+       $scope.master.showInput = true; 
+    });
+    $scope.message = 'Live change on reload!';
 });
+angular.bootstrap(document, ['app']);
