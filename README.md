@@ -1,6 +1,7 @@
 # skeletondashboard
 This is boiler template can be modified to meet the needs of the projects. 
-This pretty has widgest abstart class as well as the dashboard and assigns one to many relationship.
+This dashboard implementation has widgest abstart class as well as the dashboard and assigns one to many relationship.
+The test data can be imported using csv file and creates dashboard foreach file uploaded  
 ## Using Gulp, Bower, AngularJS, and Google Charts
 Below in the next header are all the required js libs needed if you would like to update or modify to a better lib for a specific task by all means go for it.
 Also this can be done using Bash shell on your current machine if you install git already should be ok. 
