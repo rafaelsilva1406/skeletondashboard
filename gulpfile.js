@@ -2,21 +2,38 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     connect = require('gulp-connect'),
     bower = require('gulp-bower'),
-    browserify = require('browserify'),
-    source = require('vinyl-source-stream'),
+    concat = require('gulp-concat'),
+    jshint = require('gulp-jshint'),
+    browserify = require('gulp-browserify'),
     config = {
+        domain: 'angularjs.dev',
+        devPort: 4000,
+        baseDir: './src',
         bowerDir: './bower_components',
         bootstrapDir: './bower_components/bootstrap-sass',
         fontAwesome: './bower_components/font-awesome',
-        scss: './scss',
+        js: './src/app',
+        scss: './src/scss',
         publicDir: './public'
     };
+//Bower Tasks
 gulp.task('bower',function(){
     return bower()
         .pipe(gulp.dest(config.bowerDir));
 });
+//Jshint Tasks
+gulp.task('jsCheck',function(){
+    gulp.src(config.baseDir+'app/**/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'))
+    .pipe(jshint.reporter('fail'));
+});
+//Html Tasks
+gulp.task('html',function(){
+    gulp.src(config.publicDir+'/**/*.html');
+});
+//Sass Tasks
 gulp.task('scss', function() {
-    //Grabs the file
     return gulp.src(config.scss+'/*.scss')
         .pipe(sass({
             errLogToConsole: true,
@@ -26,35 +43,35 @@ gulp.task('scss', function() {
             ],
             outputStyle: 'compressed'  
         }))
-        .pipe(gulp.dest(config.publicDir+'/css'));
+        .pipe(gulp.dest(config.publicDir+'/css'))
 });
+//Font Tasks
 gulp.task('fonts', function(){
     return gulp.src(config.fontAwesome+'/fonts/**.*')
     .pipe(gulp.dest(config.publicDir+'/fonts'));
 });
+//Js Tasks
 gulp.task('browserify', function() {
-    var b = browserify({entries:'./app/main.js'});
-    // Grabs the file
-    return b.bundle() 
-        //.pipe(concat(config.bowerDir+'/jquery/dist/jquery.min.js'))
-        .pipe(source('default.js'))
-        // saves it the directory
-        .pipe(gulp.dest(config.publicDir+'/js'))
-        on('error',function(error){
-            console.log(error.message);
-        });
+    gulp.src([config.js+'/main.js']) 
+        .pipe(browserify({
+            insertGlobals:true,
+            debug:true
+        }))
+        .pipe(concat('default.js'))
+        .pipe(gulp.dest(config.publicDir+'/js'));
 });
-gulp.task('connect', function (){
-    //grabs localhost settings attaches our dir to port
+//Server Tasks
+gulp.task('devConnect', function (){
     connect.server({
-        root: 'public',
-        port: 4000
+        root: config.publicDir.substr(2),
+        port: config.devPort
     });
 });
+//Watch Tasks
 gulp.task('watch', function() {
-    //any changes made automate build
-    gulp.watch('app/**/*.js', ['browserify']);
+    gulp.watch(config.js+'/**/*.js', ['browserify']);
     gulp.watch(config.scss+'/**/*.scss', ['scss']);
-})
-//run custom tasks on gulp 
-gulp.task('default', ['connect','bower','watch','fonts']);
+    gulp.watch(config.publicDir+'/**/*.html',['html']);
+});
+//Default Tasks
+gulp.task('default', ['jsCheck','devConnect','bower','watch','fonts']);

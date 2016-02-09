@@ -1,27 +1,26 @@
-    var angular = require('angular'),
-    uiRouter = require('angular-ui-router'),
-    app = angular.module('app', [uiRouter]);
-app.config(function($stateProvider,$urlRouterProvider){
-    $urlRouterProvider.otherwise('/');
-    $stateProvider
-        .state('index',{
-           url:'',
-           views:{
-               'header':{
-                   templateUrl: 'partials/header.html'
-               },
-               'login':{
-                   templateUrl:'partials/login.html'      
-               }
-           },
-           controller:'IndexController' 
-        });
-});
-app.controller('IndexController', function($scope){
-    $scope.master = {};
-    $scope.$apply(function(){
-       $scope.master.showInput = true; 
+ (function(root,factory){
+     'use strict';
+     //check for AMD loader
+    if(typeof define === 'function' && define.amd){
+       define(['angular'],factory); 
+    }else if(typeof exports === 'object'){ //check for Node loader
+        module.exports = factory(require('angular'));
+    }else{ //all fails load to global angular
+        root.returnExports = factory(root.angular);
+    }
+ }(this, function(angular){
+    'use strict';
+    //include module
+    require('./dashboard/module');
+    //include module
+    require('./login/module');
+    
+    //create module instance
+    var app = angular.module('app', ['dashboard','login',require('angular-ui-router')]);
+    //setup routes
+    app.config(function($stateProvider,$urlRouterProvider){
+        $urlRouterProvider.otherwise('/');
     });
-    $scope.message = 'Live change on reload!';
-});
-angular.bootstrap(document, ['app']);
+    //invoke module to document
+    angular.bootstrap(document, ['app']);
+ }));
