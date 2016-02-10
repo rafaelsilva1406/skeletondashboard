@@ -10,8 +10,10 @@
     }
 }(this, function(angular){
     'use strict';
+    //libs
+    require('ng-storage');
     //create module instance
-    var login = angular.module('login',[require('angular-ui-router')]);
+    var login = angular.module('login',[require('angular-ui-router'),'ngStorage']);
     //setup routes
     login.config(function($stateProvider,$urlRouterProvider){
         $stateProvider
@@ -26,7 +28,7 @@
         });
      });
      //invoke service
-     login.service('UserService',['',require('./Services/UserService')]);
+     login.service('UserService',['$localStorage',require('./Services/UserService')]);
     //invoke controller
     login.controller('LoginController',['$scope','UserService',require('./Controllers/IndexController')]);
 }));

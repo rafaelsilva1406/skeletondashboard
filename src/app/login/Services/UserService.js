@@ -1,9 +1,17 @@
-module.exports = function(){
-  var status = false;
+module.exports = function($localStorage){
+  var remember = false,
+      status = false;
+      
+  this.getRemember = function(){
+      return remember;
+  };
+  this.setRemember = function(bool){
+      remember = bool;
+  }
   this.getStatus = function(){
-      return status;
+      return $localStorage.userStatus;
   };
   this.setStatus = function(bool){
-      status = bool;
-  }; 
+      $localStorage.userStatus = bool;
+  };
 };
