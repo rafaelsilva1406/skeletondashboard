@@ -18,16 +18,15 @@
             .state('login',{
                 url:'/login',
                 views:{
-                    'header':{
-                        templateUrl: 'partials/header.html'
-                     },
-                     'login':{
-                                templateUrl:'partials/login.html'      
+                     '':{
+                        templateUrl:'partials/login.html',
+                        controller:'LoginController'      
                      } 
-                },
-                controller:'LoginController'
+                }
         });
      });
+     //invoke service
+     login.service('UserService',['',require('./Services/UserService')]);
     //invoke controller
-    login.controller('LoginController',['$scope',require('./Controllers/IndexController')]);
+    login.controller('LoginController',['$scope','UserService',require('./Controllers/IndexController')]);
 }));

@@ -17,8 +17,12 @@
         $stateProvider
             .state('index',{
                 url:'',
-                templateUrl: 'partials/dashboard.html',
-                controller:'DashboardController' 
+                views:{
+                    '':{
+                        templateUrl: 'partials/dashboard.html',
+                        controller:'DashboardController'
+                    }
+                }, 
         });
     });
     //invoke controller
