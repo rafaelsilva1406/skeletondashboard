@@ -1,0 +1,16 @@
+{
+    "username":"Username",
+    "usernamePlaceholder":"Username",
+    "usernameEnable":"Use Username Instead",
+    "usernameRequired":"Username Required",
+    "useremail":"Email",
+    "useremailPlaceholder":"Email address",
+    "useremailEnable":"Use Email Instead",
+    "useremailRequired":"Email Required",
+    "useremailInvalid":"Email not valid",
+    "userpassword":"Password",
+    "userpasswordPlaceholder":"Password",
+    "userpasswordRequired":"Password Required",
+    "userRemember":"Remember User",
+    "loginButton":"Log in"
+}

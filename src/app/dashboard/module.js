@@ -11,7 +11,7 @@
 }(this, function (angular){
     'use strict';
     //create module instance
-    var dashboard = angular.module('dashboard',[require('angular-ui-router')]);
+    var dashboard = angular.module('dashboard',[]);
     //setup routes
     dashboard.config(function($stateProvider,$urlRouterProvider){
         $stateProvider

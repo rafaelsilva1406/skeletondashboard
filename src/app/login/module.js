@@ -10,12 +10,10 @@
     }
 }(this, function(angular){
     'use strict';
-    //libs
-    require('ng-storage');
     //create module instance
-    var login = angular.module('login',[require('angular-ui-router'),'ngStorage']);
-    //setup routes
-    login.config(function($stateProvider,$urlRouterProvider){
+    var login = angular.module('login',['ngStorage','pascalprecht.translate']);
+    login.config(function($stateProvider,$urlRouterProvider,$translateProvider,$translatePartialLoaderProvider,showErrorsConfigProvider){
+        //setup routes
         $stateProvider
             .state('login',{
                 url:'/login',
@@ -26,6 +24,18 @@
                      } 
                 }
         });
+        
+        //setup language
+        $translatePartialLoaderProvider.addPart('login');
+        $translateProvider.useLoader('$translatePartialLoader', {
+            urlTemplate: '/language/{part}/locale-{lang}.json'
+        });
+        $translateProvider.preferredLanguage('en');
+        //enable escaping of html
+        $translateProvider.useSanitizeValueStrategy('sanitize');
+        
+        //setup form validation
+        showErrorsConfigProvider.showSuccess(true);
      });
      //invoke service
      login.service('UserService',['$localStorage',require('./Services/UserService')]);
